@@ -41,3 +41,11 @@ redis:
       otpCode: "member:otpCode:" #动态校验码前缀
     expire:
       otpCode: 60 #动态校验码过期时间
+
+#登录拦截验证
+member:
+  auth:
+    shouldSkipUrls:
+    - /swagger-ui.html/**
+    - /sso/**
+    - /home/**

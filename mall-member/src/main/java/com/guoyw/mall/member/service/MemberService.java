@@ -1,6 +1,7 @@
 package com.guoyw.mall.member.service;
 
-import com.guoyw.mall.member.domain.Register;
+import com.guoyw.mall.mbg.model.UmsMember;
+import com.guoyw.mall.member.dto.RegisterDTO;
 
 /**
  * @program: mall-demo
@@ -22,5 +23,8 @@ public interface MemberService {
   public String getOtpCode(String telPhone);
 
   // 会员注册
-  public int register(Register register);
+  public int register(RegisterDTO registerDTO);
+
+  // 会员登陆
+  public UmsMember login(String username, String password);
 }

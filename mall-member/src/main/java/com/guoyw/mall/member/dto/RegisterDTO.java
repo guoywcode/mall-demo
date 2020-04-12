@@ -1,4 +1,4 @@
-package com.guoyw.mall.member.domain;
+package com.guoyw.mall.member.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,9 +16,9 @@ import java.io.Serializable;
  * @create: 2020-04-12 12:32
  **/
 
-@ApiModel("会员注册-domain")
+@ApiModel("会员注册-dto")
 @Data
-public class Register implements Serializable {
+public class RegisterDTO implements Serializable {
 
   @ApiModelProperty("手机号")
   @NotBlank(message = "电话好码不能为空")

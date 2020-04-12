@@ -5,7 +5,7 @@ import com.guoyw.mall.mbg.mapper.UmsMemberMapper;
 import com.guoyw.mall.mbg.model.UmsMember;
 import com.guoyw.mall.mbg.model.UmsMemberExample;
 import com.guoyw.mall.member.config.properties.RedisKeyPrefixConfig;
-import com.guoyw.mall.member.domain.Register;
+import com.guoyw.mall.member.dto.RegisterDTO;
 import com.guoyw.mall.member.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -72,20 +72,39 @@ public class MemberServiceImpl implements MemberService {
 
   //region 会员注册
   @Override
-  public int register(Register register) {
+  public int register(RegisterDTO registerDTO) {
 
-    String otpPhone = (String) redisTemplate.opsForValue().get(redisKeyPrefixConfig.getPrefix().getOtpCode()+register.getPhone());
-    if(StringUtils.isEmpty(otpPhone) || !otpPhone.equals(register.getOtpCode()))
+    String otpPhone = (String) redisTemplate.opsForValue().get(redisKeyPrefixConfig.getPrefix().getOtpCode()+ registerDTO.getPhone());
+    if(StringUtils.isEmpty(otpPhone) || !otpPhone.equals(registerDTO.getOtpCode()))
       throw new BusinessException("动态验证码不正确");
 
     UmsMember umsMember = new UmsMember();
-    BeanUtils.copyProperties(register,umsMember);
+    BeanUtils.copyProperties(registerDTO,umsMember);
 
     umsMember.setStatus(1);
     umsMember.setMemberLevelId(4L);
-    umsMember.setPassword(passwordEncoder.encode(register.getPassword()));
+    umsMember.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
 
     return umsMemberMapper.insertSelective(umsMember);
+  }
+//endregion
+
+  //region 会员登陆
+  @Override
+  public UmsMember login(String username, String password) {
+    UmsMemberExample umsMemberExample = new UmsMemberExample();
+    umsMemberExample.createCriteria()
+        .andUsernameEqualTo(username)
+        .andStatusEqualTo(1);
+    List<UmsMember> umsMembers = umsMemberMapper.selectByExample(umsMemberExample);
+
+    if(CollectionUtils.isEmpty(umsMembers))
+      throw new BusinessException("用户名密码错误");
+
+    if(!passwordEncoder.matches(password,umsMembers.get(0).getPassword()))
+      throw new BusinessException("用户名密码错误");
+
+    return umsMembers.get(0);
   }
   //endregion
 }
