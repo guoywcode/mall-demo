@@ -1,10 +1,14 @@
 package com.guoyw.mall.member.controller;
 
+import com.guoyw.mall.common.api.CommonResult;
+import com.guoyw.mall.member.domain.Register;
 import com.guoyw.mall.member.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * @program: mall-demo
@@ -15,14 +19,27 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/sso")
-@Api(tags ="MemberController", description = "会员登录注册管理")
+@Api(tags = "MemberController", description = "会员登录注册管理")
 public class MemberController {
 
   @Autowired
   private MemberService memberService;
 
-  @GetMapping("/getOtpCode")
-  public String getOtpCode(@RequestParam String telPhone) {
-    return memberService.getOtpCode(telPhone);
+  @PostMapping("/getOtpCode")
+  @ApiOperation("获取手机验证码")
+  public CommonResult getOtpCode(@RequestParam String telPhone) {
+    String otpCode = memberService.getOtpCode(telPhone);
+    return CommonResult.success(otpCode);
   }
+
+
+  @PostMapping("/register")
+  @ApiOperation("会员注册")
+  public CommonResult register(@Valid @RequestBody Register register) {
+    int number = memberService.register(register);
+    if (number > 0)
+      return CommonResult.success(null);
+    return CommonResult.failed();
+  }
+
 }

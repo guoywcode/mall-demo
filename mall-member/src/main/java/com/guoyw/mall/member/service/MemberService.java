@@ -1,5 +1,7 @@
 package com.guoyw.mall.member.service;
 
+import com.guoyw.mall.member.domain.Register;
+
 /**
  * @program: mall-demo
  * @description:
@@ -19,5 +21,6 @@ public interface MemberService {
   */
   public String getOtpCode(String telPhone);
 
-
+  // 会员注册
+  public int register(Register register);
 }

@@ -14,17 +14,17 @@ spring:
       stat-view-servlet: #访问监控网页的登录用户名和密码
         login-username: druid
         login-password: druid
-      redis:
-        host: 47.102.192.148
-        port: 6379
-        password: guoyw_redis # Redis服务器地址
-        timeout: 5000ms
-        lettuce:
-          pool:
-            max-active: 8
-            max-wait: -1ms
-            max-idle: 8
-            min-idle: 0
+  redis:
+    host: 47.102.192.148
+    port: 6379
+    password: guoyw_redis # Redis服务器地址
+    timeout: 5000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
     #  session:
     #    store-type: redis
 

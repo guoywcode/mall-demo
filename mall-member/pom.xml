@@ -26,6 +26,13 @@
     </dependency>
 
 
+    <!-- spring-security 安全框架 -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
+      <version>RELEASE</version>
+    </dependency>
+
     <!--springboot web-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
