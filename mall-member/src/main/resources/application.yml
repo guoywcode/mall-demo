@@ -47,5 +47,8 @@ member:
   auth:
     shouldSkipUrls:
     - /swagger-ui.html/**
+    - /swagger-resources/**
+    - /webjars/**
+    - /v2/**
     - /sso/**
     - /home/**
