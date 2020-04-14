@@ -23,7 +23,9 @@
 
   <modules>
     <module>mall-mbg</module>
+    <module>mall-common</module>
     <module>mall-member</module>
+    <module>mall-admin</module>
   </modules>
 
   <dependencyManagement>
@@ -39,8 +41,13 @@
         <version>${mall.demo.version}</version>
       </dependency>
       <dependency>
+      <groupId>com.guoyw</groupId>
+      <artifactId>mall-member</artifactId>
+      <version>${mall.demo.version}</version>
+    </dependency>
+      <dependency>
         <groupId>com.guoyw</groupId>
-        <artifactId>mall-member</artifactId>
+        <artifactId>mall-admin</artifactId>
         <version>${mall.demo.version}</version>
       </dependency>
     </dependencies>
