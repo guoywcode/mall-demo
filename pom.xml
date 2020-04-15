@@ -24,6 +24,7 @@
   <modules>
     <module>mall-mbg</module>
     <module>mall-common</module>
+    <module>mall-security</module>
     <module>mall-member</module>
     <module>mall-admin</module>
   </modules>
@@ -33,6 +34,11 @@
       <dependency>
         <groupId>com.guoyw</groupId>
         <artifactId>mall-common</artifactId>
+        <version>${mall.demo.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.guoyw</groupId>
+        <artifactId>mall-security</artifactId>
         <version>${mall.demo.version}</version>
       </dependency>
       <dependency>
@@ -70,6 +76,12 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+    <!--Hutool Java工具包-->
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>4.5.7</version>
     </dependency>
 
     <!--springboot 核心包-->

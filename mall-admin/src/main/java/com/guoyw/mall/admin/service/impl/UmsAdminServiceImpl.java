@@ -7,6 +7,8 @@ import com.guoyw.mall.mbg.model.UmsAdmin;
 import com.guoyw.mall.mbg.model.UmsAdminExample;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -61,4 +63,15 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     return varUmsAdmin;
   }
   //endregion
+
+  @Override
+  public UserDetails loadUserByUsername(String username) {
+    UmsAdmin admin = getUmsAdminByUsername(username);
+/*    if (admin != null) {
+      List<UmsPermission> permissionList = getPermissionList(admin.getId());
+      return new AdminUserDetails(admin,permissionList);
+    }*/
+    throw new UsernameNotFoundException("用户名或密码错误");
+  }
+
 }

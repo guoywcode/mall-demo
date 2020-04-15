@@ -2,6 +2,7 @@ package com.guoyw.mall.admin.service;
 
 import com.guoyw.mall.admin.dto.UmsAdminParamDTO;
 import com.guoyw.mall.mbg.model.UmsAdmin;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @program: mall-demo
@@ -17,4 +18,9 @@ public interface UmsAdminService {
 
   // 后台管理员注册功能
   UmsAdmin register(UmsAdminParamDTO umsAdminParamDTO);
+
+  /**
+   * 获取用户信息
+   */
+  UserDetails loadUserByUsername(String username);
 }

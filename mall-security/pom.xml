@@ -8,33 +8,30 @@
     <version>1.0.0</version>
   </parent>
   <groupId>com.guoyw</groupId>
-  <artifactId>mall-admin</artifactId>
+  <artifactId>mall-security</artifactId>
   <packaging>jar</packaging>
-  <name>mall-admin</name>
+  <name>mall-security</name>
   <description>Demo project for Spring Boot</description>
 
+
   <dependencies>
-    <dependency>
-      <groupId>com.guoyw</groupId>
-      <artifactId>mall-mbg</artifactId>
-    </dependency>
     <dependency>
       <groupId>com.guoyw</groupId>
       <artifactId>mall-common</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.guoyw</groupId>
-      <artifactId>mall-security</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <!-- json web token 工具 -->
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>0.9.1</version>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
-
 </project>
