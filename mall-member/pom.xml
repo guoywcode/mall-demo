@@ -37,6 +37,13 @@
       <version>RELEASE</version>
     </dependency>
 
+    <!-- json web token 工具 -->
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>0.9.1</version>
+    </dependency>
+
     <!--springboot web-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
