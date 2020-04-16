@@ -18,8 +18,8 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@ApiModel(value = "UmsAdminParamDTO",description = "后台用户注册")
-public class UmsAdminParamDTO implements Serializable {
+@ApiModel(value = "UmsAdminDTO",description = "后台用户注册")
+public class UmsAdminDTO implements Serializable {
 
   @ApiModelProperty(value = "用户名",required = true)
   @NotEmpty(message = "用户名不能为空")
