@@ -118,6 +118,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
       SecurityContextHolder.getContext().setAuthentication(authentication);
       token = jwtTokenUtil.generateToken(userDetails);
       insertLoginLog(username);
+      return token;
     } catch (AuthenticationException e) {
       log.warn("登录异常:{}", e.getMessage());
     }

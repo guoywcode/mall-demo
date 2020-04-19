@@ -33,6 +33,6 @@ public interface UmsAdminRoleRelationDao {
   /**
    * 获取用户所有权限
    */
-  List<UmsPermission> getPermissionList(@Param("admnId") Long adminId);
+  List<UmsPermission> getPermissionList(@Param("adminId") Long adminId);
 
 }
