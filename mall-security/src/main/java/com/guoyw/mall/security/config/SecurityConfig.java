@@ -82,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     return new RestfulAccessDeniedHandler();
   }
 
-  @Bean
+//  @Bean
   public RestAuthenticationEntryPoint restAuthenticationEntryPoint() {
     return new RestAuthenticationEntryPoint();
   }
