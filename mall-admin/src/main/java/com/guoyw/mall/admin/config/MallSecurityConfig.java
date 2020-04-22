@@ -1,6 +1,5 @@
 package com.guoyw.mall.admin.config;
 
-
 import com.guoyw.mall.admin.service.UmsAdminService;
 import com.guoyw.mall.security.config.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;

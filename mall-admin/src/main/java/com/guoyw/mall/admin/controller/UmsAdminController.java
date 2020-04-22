@@ -79,8 +79,7 @@ public class UmsAdminController {
   }
 
   @ApiOperation(value = "获取当前登录用户信息")
-  @RequestMapping(value = "/info", method = RequestMethod.GET)
-  @ResponseBody
+  @GetMapping(value = "/info")
   public CommonResult getAdminInfo(Principal principal) {
     String username = principal.getName();
     UmsAdmin umsAdmin = umsAdminService.getUmsAdminByUsername(username);

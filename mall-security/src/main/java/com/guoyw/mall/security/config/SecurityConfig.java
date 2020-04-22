@@ -5,6 +5,7 @@ import com.guoyw.mall.security.component.RestAuthenticationEntryPoint;
 import com.guoyw.mall.security.component.RestfulAccessDeniedHandler;
 import com.guoyw.mall.security.utils.JwtTokenUtil;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

@@ -1,11 +1,13 @@
 package com.guoyw.mall.admin.dto;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * @program: mall-demo
@@ -15,7 +17,8 @@ import javax.validation.constraints.NotNull;
  **/
 @Getter
 @Setter
-public class UmsAdminLoginDTO {
+@ApiModel(value = "UmsAdminLoginDTO",description = "后台用户登陆")
+public class UmsAdminLoginDTO implements Serializable{
 
   @ApiModelProperty(value = "用户名",required = true)
   @NotEmpty(message = "用户名不能为空")
