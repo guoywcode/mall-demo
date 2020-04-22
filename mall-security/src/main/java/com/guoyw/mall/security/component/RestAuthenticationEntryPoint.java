@@ -19,26 +19,6 @@ import java.util.Enumeration;
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-      StringBuilder sb = new StringBuilder(1000);
-      //获取请求参数
-      Enumeration em = request.getParameterNames();
-      JSONObject data = new JSONObject();
-      while (em.hasMoreElements()) {
-        String name = (String) em.nextElement();
-        String value = request.getParameter(name);
-        data.put(name,value);
-      }
-      sb .append("-------------------------------------------------------------\n");
-//      HandlerMethod h = (HandlerMethod) handler;
-//      sb.append("Controller: ").append(h.getBean().getClass().getName()).append("\n");
-//      sb.append("Method    : ").append(h.getMethod().getName()).append("\n");
-      sb.append("Params    : ").append(data).append("\n");
-      sb.append("URI       : ").append(request.getRequestURI()).append("\n");
-      sb.append("URL       : ").append(request.getRequestURL()).append("\n");
-      sb .append("-------------------------------------------------------------\n");
-      System.out.println(sb.toString());
-
-
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         response.getWriter().println(JSONUtil.parse(CommonResult.unauthorized(authException.getMessage())));
