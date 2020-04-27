@@ -1,18 +1,21 @@
 package com.guoyw.mall.admin.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.guoyw.mall.admin.dao.PmsProductCategoryAttributeRelationDao;
+import com.guoyw.mall.admin.dao.PmsProductCategoryDao;
 import com.guoyw.mall.admin.dto.PmsProductCategoryDTO;
+import com.guoyw.mall.admin.vo.PmsProductCategoryWithChildrenItemVO;
 import com.guoyw.mall.admin.service.PmsProductCategoryService;
+import com.guoyw.mall.mbg.mapper.PmsProductCategoryAttributeRelationMapper;
 import com.guoyw.mall.mbg.mapper.PmsProductCategoryMapper;
-import com.guoyw.mall.mbg.model.PmsProductCategory;
-import com.guoyw.mall.mbg.model.PmsProductCategoryAttributeRelation;
+import com.guoyw.mall.mbg.mapper.PmsProductMapper;
+import com.guoyw.mall.mbg.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,6 +29,12 @@ public class PmsProductCategoryServiceImpl implements PmsProductCategoryService{
   private PmsProductCategoryMapper productCategoryMapper;
   @Autowired
   private PmsProductCategoryAttributeRelationDao productCategoryAttributeRelationDao;
+  @Autowired
+  private PmsProductMapper productMapper;
+  @Autowired
+  private PmsProductCategoryAttributeRelationMapper productCategoryAttributeRelationMapper;
+  @Autowired
+  private PmsProductCategoryDao pmsProductCategoryDao;
   
   //region 创建商品分类
   @Override
@@ -42,6 +51,65 @@ public class PmsProductCategoryServiceImpl implements PmsProductCategoryService{
     if(!CollectionUtils.isEmpty(productAttributeIdList))
       this.insertRelationList(pmsProductCategory.getId(), productAttributeIdList);
     return count;
+  }
+  //endregion
+  
+  //region 修改商品分类
+  @Override
+  public int update(Long id, PmsProductCategoryDTO pmsProductCategoryDTO){
+    PmsProductCategory pmsProductCategory = new PmsProductCategory();
+    pmsProductCategory.setId(id);
+    BeanUtils.copyProperties(pmsProductCategoryDTO,pmsProductCategory);
+    // 设置分类等级
+    this.setCategoryLevel(pmsProductCategory);
+    // 更新商品分类事要更新商品中的名称
+    PmsProduct pmsProduct = new PmsProduct();
+    pmsProduct.setProductCategoryName(pmsProductCategory.getName());
+    PmsProductExample example = new PmsProductExample();
+    example.createCriteria().andProductCategoryIdEqualTo(id);
+    productMapper.updateByExampleSelective(pmsProduct,example);
+    
+    // 同时更新筛选属性的信息
+    PmsProductCategoryAttributeRelationExample relationExample = new PmsProductCategoryAttributeRelationExample();
+    relationExample.createCriteria().andProductCategoryIdEqualTo(id);
+    productCategoryAttributeRelationMapper.deleteByExample(relationExample);
+    if(!CollectionUtils.isEmpty(pmsProductCategoryDTO.getProductAttributeIdList())){
+      this.insertRelationList(id,pmsProductCategoryDTO.getProductAttributeIdList());
+    }
+    
+    return productCategoryMapper.updateByPrimaryKey(pmsProductCategory);
+  }
+  //endregion
+  
+  // 查询商品分类-分页
+  @Override
+  public List<PmsProductCategory> getList(Long parentId, Integer pageSize, Integer pageNum){
+    PageHelper.startPage(pageNum,pageSize);
+    PmsProductCategoryExample example = new PmsProductCategoryExample();
+    example.setOrderByClause("sort desc");
+    example.createCriteria().andParentIdEqualTo(parentId);
+    return productCategoryMapper.selectByExample(example);
+  }
+  //endregion
+  
+  // 查询商品分类-根据id
+  @Override
+  public PmsProductCategory getItem(Long id){
+    return productCategoryMapper.selectByPrimaryKey(id);
+  }
+  //endregion
+  
+  // 删除商品分类
+  @Override
+  public int delete(Long id){
+    return productCategoryMapper.deleteByPrimaryKey(id);
+  }
+  //endregion
+  
+  // 获取商品分类一级分类&子类
+  @Override
+  public List<PmsProductCategoryWithChildrenItemVO> listWithChildren(){
+    return pmsProductCategoryDao.listWithChildren();
   }
   //endregion
   
