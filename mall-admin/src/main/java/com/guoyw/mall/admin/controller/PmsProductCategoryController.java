@@ -25,10 +25,10 @@ import java.util.List;
 @RequestMapping("/api/productCategory")
 @Api(tags = "PmsProductCategoryController", description = "商品分类管理")
 public class PmsProductCategoryController{
-  
+
   @Autowired
   private PmsProductCategoryService pmsProductCategoryService;
-  
+
   @ApiOperation("添加商品分类")
   @PostMapping("/create")
   @PreAuthorize("hasAnyAuthority('pms:productCategory:create')")
@@ -40,7 +40,7 @@ public class PmsProductCategoryController{
       return CommonResult.failed();
     }
   }
-  
+
   @ApiOperation("更新商品分类")
   @PutMapping("/update/{id}")
   @PreAuthorize("hasAnyAuthority('pms:productCategory:update')")
@@ -50,9 +50,9 @@ public class PmsProductCategoryController{
       return CommonResult.success(count);
     else
       return CommonResult.failed();
-    
+
   }
-  
+
   @ApiOperation("查询商品分类-分页")
   @GetMapping("/page/{parentId}")
   @PreAuthorize("hasAnyAuthority('pms:productCategory:read')")
@@ -62,7 +62,7 @@ public class PmsProductCategoryController{
     List<PmsProductCategory> productCategoryList =  pmsProductCategoryService.getList(parentId,pageSize,pageNum);
     return CommonResult.success(CommonPage.restPage(productCategoryList));
   }
-  
+
   @ApiOperation("根据id获取商品分类")
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   @ResponseBody
@@ -71,7 +71,7 @@ public class PmsProductCategoryController{
     PmsProductCategory productCategory = pmsProductCategoryService.getItem(id);
     return CommonResult.success(productCategory);
   }
-  
+
   @ApiOperation("删除商品分类")
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
   @ResponseBody
@@ -84,7 +84,7 @@ public class PmsProductCategoryController{
       return CommonResult.failed();
     }
   }
-  
+
   @ApiOperation("查询所有一级分类及子分类")
   @RequestMapping(value = "/list/withChildren", method = RequestMethod.GET)
   @ResponseBody
@@ -93,4 +93,5 @@ public class PmsProductCategoryController{
     List<PmsProductCategoryWithChildrenItemVO> list = pmsProductCategoryService.listWithChildren();
     return CommonResult.success(list);
   }
+
 }
