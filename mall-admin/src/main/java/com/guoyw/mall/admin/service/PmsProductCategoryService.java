@@ -32,4 +32,12 @@ public interface PmsProductCategoryService {
   
   // 获取商品分类一级列表&和之类
   List<PmsProductCategoryWithChildrenItemVO> listWithChildren();
+  
+  // 修改导航栏显示状态
+  @Transactional
+  int updateNavStatus(List<Long> ids, Integer navStatus);
+  
+  // 修改显示状态
+  @Transactional
+  int updateShowStatus(List<Long> ids, Integer showStatus);
 }

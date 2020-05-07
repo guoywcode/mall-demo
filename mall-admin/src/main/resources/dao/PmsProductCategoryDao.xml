@@ -11,8 +11,28 @@
         select
             c1.id,
             c1.name,
-            c2.id as  child_id,
-            c2.name as child_name
+            c1.parent_id,
+            c1.level,
+            c1.product_count,
+            c1.product_unit,
+            c1.nav_status,
+            c1.show_status,
+            c1.sort,
+            c1.icon,
+            c1.keywords,
+            c1.description,
+            c2.id as child_id,
+            c2.name as child_name,
+            c2.parent_id as child_parent_id,
+            c2.level as child_level,
+            c2.product_count as child_product_count,
+            c2.product_unit as child_product_unit,
+            c2.nav_status as child_nav_status,
+            c2.show_status as child_show_status,
+            c2.sort as child_sort,
+            c2.icon as child_icon,
+            c2.keywords as child_keywords,
+            c2.description as child_description
         from pms_product_category c1 left join pms_product_category c2 on c1.id = c2.parent_id
         where c1.parent_id = 0
     </select>

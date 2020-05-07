@@ -106,10 +106,34 @@ public class PmsProductCategoryServiceImpl implements PmsProductCategoryService{
   }
   //endregion
   
-  // 获取商品分类一级分类&子类
+  //region 获取商品分类一级分类&子类
   @Override
   public List<PmsProductCategoryWithChildrenItemVO> listWithChildren(){
     return pmsProductCategoryDao.listWithChildren();
+  }
+  //endregion
+  
+  //region 更新导航栏显示状态
+  @Override
+  public int updateNavStatus(List<Long> ids, Integer navStatus){
+    PmsProductCategory pmsProductCategory = new PmsProductCategory();
+    pmsProductCategory.setNavStatus(navStatus);
+    
+    PmsProductCategoryExample example = new PmsProductCategoryExample();
+    example.createCriteria().andIdIn(ids);
+    return productCategoryMapper.updateByExampleSelective(pmsProductCategory,example);
+  }
+  //endregion
+  
+  //region 更新显示状态
+  @Override
+  public int updateShowStatus(List<Long> ids, Integer showStatus){
+    PmsProductCategory pmsProductCategory = new PmsProductCategory();
+    pmsProductCategory.setShowStatus(showStatus);
+  
+    PmsProductCategoryExample example = new PmsProductCategoryExample();
+    example.createCriteria().andIdIn(ids);
+    return productCategoryMapper.updateByExampleSelective(pmsProductCategory,example);
   }
   //endregion
   

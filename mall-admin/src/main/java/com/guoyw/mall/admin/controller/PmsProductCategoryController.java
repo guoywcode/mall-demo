@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 /**
@@ -65,7 +64,6 @@ public class PmsProductCategoryController{
 
   @ApiOperation("根据id获取商品分类")
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-  @ResponseBody
   @PreAuthorize("hasAuthority('pms:productCategory:read')")
   public CommonResult<PmsProductCategory> getItem(@PathVariable Long id) {
     PmsProductCategory productCategory = pmsProductCategoryService.getItem(id);
@@ -74,7 +72,6 @@ public class PmsProductCategoryController{
 
   @ApiOperation("删除商品分类")
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-  @ResponseBody
   @PreAuthorize("hasAuthority('pms:productCategory:delete')")
   public CommonResult delete(@PathVariable Long id) {
     int count = pmsProductCategoryService.delete(id);
@@ -87,11 +84,32 @@ public class PmsProductCategoryController{
 
   @ApiOperation("查询所有一级分类及子分类")
   @RequestMapping(value = "/list/withChildren", method = RequestMethod.GET)
-  @ResponseBody
   @PreAuthorize("hasAuthority('pms:productCategory:read')")
   public CommonResult<List<PmsProductCategoryWithChildrenItemVO>> listWithChildren() {
     List<PmsProductCategoryWithChildrenItemVO> list = pmsProductCategoryService.listWithChildren();
     return CommonResult.success(list);
   }
-
+  
+  @ApiOperation("修改导航栏显示状态")
+  @PostMapping("/updateNavStatus")
+//  @PreAuthorize("hasAnyAuthority('pms:productCategory:updateNavStatus')")
+  public CommonResult updateNavStatus(@RequestParam List<Long> ids,@RequestParam Integer navStatus){
+    int count = pmsProductCategoryService.updateNavStatus(ids,navStatus);
+    if(count > 0)
+      return CommonResult.success(count);
+    else
+      return CommonResult.failed();
+  }
+  
+  @ApiOperation("修改显示状态")
+  @PostMapping("/updateShowStatus")
+//  @PreAuthorize("hasAnyAuthority('pms:productCategory:updateShowStatus')")
+  public CommonResult updateShowStatus(@RequestParam List<Long> ids,@RequestParam Integer showStatus){
+    int count = pmsProductCategoryService.updateShowStatus(ids,showStatus);
+    if(count > 0)
+      return CommonResult.success(count);
+    else
+      return CommonResult.failed();
+  }
+  
 }

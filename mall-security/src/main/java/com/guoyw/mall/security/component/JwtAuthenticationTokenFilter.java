@@ -43,7 +43,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                                     FilterChain chain) throws ServletException, IOException {
 
 
-      //获取请求参数
+   /*   //获取请求参数
       StringBuilder sb = new StringBuilder(1000);
       Enumeration em = request.getParameterNames();
       JSONObject data = new JSONObject();
@@ -57,7 +57,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
       sb.append("URI       : ").append(request.getRequestURI()).append("\n");
       sb.append("URL       : ").append(request.getRequestURL()).append("\n");
       sb .append("-------------------------------------------------------------\n");
-      System.out.println(sb.toString());
+      System.out.println(sb.toString());*/
 
 
       // 登路拦截
