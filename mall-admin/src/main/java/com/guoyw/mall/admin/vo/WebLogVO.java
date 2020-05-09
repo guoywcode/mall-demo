@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 @Data
 @Accessors(chain = true)
-public class WebLogVo implements Serializable{
+public class WebLogVO implements Serializable{
   
   /**
    * 操作描述

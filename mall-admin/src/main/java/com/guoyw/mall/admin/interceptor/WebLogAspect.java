@@ -3,7 +3,7 @@ package com.guoyw.mall.admin.interceptor;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.json.JSONUtil;
-import com.guoyw.mall.admin.vo.WebLogVo;
+import com.guoyw.mall.admin.vo.WebLogVO;
 import io.swagger.annotations.ApiOperation;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -67,7 +67,7 @@ public class WebLogAspect{
     ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
     HttpServletRequest request = attributes.getRequest();
     //记录请求信息(通过Logstash传入Elasticsearch)
-    WebLogVo webLog = new WebLogVo();
+    WebLogVO webLog = new WebLogVO();
     Object result = joinPoint.proceed();
     Signature signature = joinPoint.getSignature();
     MethodSignature methodSignature = (MethodSignature) signature;

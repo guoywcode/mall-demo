@@ -63,4 +63,15 @@ secure:
     - /api/admin/register
     - /api/upload/product/**
 
-
+aliyun:
+  oss:
+    endpoint: xxxx.com  # oss对外服务的访问域名
+    accessKeyId: xxxx   # 访问身份验证中用到用户标识
+    accessKeySecret: xxxxx # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
+    bucketName: guoyw-mall # oss的存储空间
+    policy:
+      expire: 300 # 签名有效期(S)
+    maxSize: 10 # 上传文件大小(M)
+    callback: xxxxx  # 文件上传成功后的回调地址
+    dir:
+      prefix: mall-demo/images/ # 上传文件夹路径前缀
