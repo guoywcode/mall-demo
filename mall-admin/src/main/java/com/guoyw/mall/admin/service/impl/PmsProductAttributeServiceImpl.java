@@ -94,4 +94,13 @@ public class PmsProductAttributeServiceImpl implements PmsProductAttributeServic
     return productAttributeMapper.selectByExample(example);
   }
   //endregion
+  
+  //region 获取商品属性-根据商品分类Id
+  @Override
+  public List<PmsProductAttribute> getListByCategoryId(Long productCategoryId){
+    PmsProductAttributeExample example = new PmsProductAttributeExample();
+    example.createCriteria().andProductAttributeCategoryIdEqualTo(productCategoryId);
+    return productAttributeMapper.selectByExample(example);
+  }
+  //endregion
 }

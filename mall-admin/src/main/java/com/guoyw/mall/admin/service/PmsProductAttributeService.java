@@ -28,4 +28,7 @@ public interface PmsProductAttributeService{
   
   // 获取商品分类列表
   List<PmsProductAttribute> getList(Long id, Integer type, Integer pageSize, Integer pageNum);
+  
+  // 获取商品属性-根据商品分类id
+  List<PmsProductAttribute> getListByCategoryId(Long productCategoryId);
 }

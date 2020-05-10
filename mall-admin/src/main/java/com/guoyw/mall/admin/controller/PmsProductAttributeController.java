@@ -69,4 +69,11 @@ public class PmsProductAttributeController{
     List<PmsProductAttribute> productAttributeList = pmsProductAttributeService.getList(id, type, pageSize, pageNum);
     return CommonResult.success(CommonPage.restPage(productAttributeList));
   }
+ 
+  @ApiOperation("获取商品属性-根据分类id")
+  @GetMapping("/list/{productCategoryId}")
+  public CommonResult getListByCategoryId(@PathVariable Long productCategoryId){
+    List<PmsProductAttribute> list = pmsProductAttributeService.getListByCategoryId(productCategoryId);
+    return CommonResult.success(list);
+  }
 }
