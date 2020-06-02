@@ -101,4 +101,21 @@ public class PmsBrandServiceImpl implements PmsBrandService{
     return brandMapper.selectByPrimaryKey(id);
   }
   //endregion
+  
+  //region 更新品牌的显示状态
+  @Override
+  public int updateShowStatus(Long id){
+  
+    PmsBrand pmsBrand =  brandMapper.selectByPrimaryKey(id);
+    if(pmsBrand == null)
+      return 0;
+    
+    if(pmsBrand.getShowStatus() == 0)
+      pmsBrand.setShowStatus(1);
+    else
+      pmsBrand.setShowStatus(0);
+    
+    return brandMapper.updateByPrimaryKey(pmsBrand);
+  }
+  //endregion
 }

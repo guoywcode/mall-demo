@@ -39,7 +39,7 @@ import java.util.List;
 @Slf4j
 public class UmsAdminServiceImpl implements UmsAdminService {
 
-  @Autowired
+  @Autowired(required = false)
   private JwtTokenUtil jwtTokenUtil;
   @Autowired
   private UmsAdminMapper umsAdminMapper;

@@ -33,4 +33,7 @@ public interface PmsBrandService{
   
   // 获取商品信息-根据id
   PmsBrand getItem(Long id);
+  
+  // 更改品牌显示状态
+  int updateShowStatus(Long id);
 }
